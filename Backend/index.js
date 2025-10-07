@@ -17,9 +17,11 @@ app.use(express.json())
 app.use(cookieParser())
 
 
-const authRoutes = require('./routes/authRoutes')
+const authRoutes = require('./routes/authRoutes');
+const doctorRoutes = require('./routes/doctorRoutes')
 
 app.use('/api/auth', authRoutes);
+app.use('/api/doctors', doctorRoutes);
 
 
 
