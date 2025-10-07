@@ -19,9 +19,11 @@ app.use(cookieParser())
 
 const authRoutes = require('./routes/authRoutes');
 const doctorRoutes = require('./routes/doctorRoutes')
+const patientRoutes = require('./routes/patientRoutes')
 
 app.use('/api/auth', authRoutes);
 app.use('/api/doctors', doctorRoutes);
+app.use('/api/patients', patientRoutes)
 
 
 
