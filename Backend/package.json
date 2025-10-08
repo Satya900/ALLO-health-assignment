@@ -7,8 +7,13 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "seed": "node scripts/seedUsers.js",
+    "seed-demo": "node scripts/seedDemoData.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node --watch index.js"
+    "lint": "echo \"Linting not configured\"",
+    "build": "echo \"Build completed - no build step required for Node.js\""
   },
   "dependencies": {
     "@types/express": "^5.0.3",

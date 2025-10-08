@@ -79,9 +79,15 @@ const loginUser = async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000, // 1 day
     });
 
-        res.status(200).json({
+    res.status(200).json({
       message: "Login successful",
-      user: { name: existingUser.name, role: existingUser.role },
+      token: token, // Include token in response for frontend
+      user: { 
+        id: existingUser._id,
+        name: existingUser.name, 
+        email: existingUser.email,
+        role: existingUser.role 
+      },
     });
 
   } catch (error) {

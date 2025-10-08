@@ -6,12 +6,33 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:prod": "NODE_ENV=production vite build",
+    "build:staging": "NODE_ENV=staging vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "lint:fix": "eslint . --fix",
+    "preview": "vite preview",
+    "preview:prod": "vite preview --port 4173",
+    "type-check": "echo 'Type checking not configured'",
+    "test": "echo 'Tests not configured'",
+    "test:ci": "echo 'CI tests not configured'",
+    "analyze": "vite build --mode analyze",
+    "clean": "rimraf dist node_modules/.vite",
+    "deploy": "npm run build:prod && node scripts/deploy.js",
+    "deploy:staging": "npm run build:staging && node scripts/deploy.js staging",
+    "deploy:docker": "docker build -t clinic-frontend .",
+    "start": "npm run preview:prod"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.9.0",
+    "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/vite": "^4.1.14",
+    "axios": "^1.12.2",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^7.9.3",
+    "tailwindcss": "^4.1.14"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
