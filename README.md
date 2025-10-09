@@ -76,10 +76,10 @@ A modern, full-stack clinic front desk management system built with React, Node.
 
 ### Prerequisites
 - Node.js (v16 or higher)
-- MongoDB (v5 or higher)
+- MongoDB (v5 or higher) or MongoDB Atlas account
 - npm or yarn package manager
 
-### Installation
+### Local Development
 
 1. **Clone the repository**
    ```bash
@@ -95,6 +95,26 @@ A modern, full-stack clinic front desk management system built with React, Node.
    # Linux/Mac
    chmod +x setup-demo.sh && ./setup-demo.sh
    ```
+
+### 🎨 Deploy to Render (Production)
+
+**One-Click Deploy:**
+1. Fork this repository
+2. Go to [Render Dashboard](https://dashboard.render.com)
+3. Click "New" → "Blueprint"
+4. Connect your forked repository
+5. Click "Apply" - Render will deploy everything automatically!
+
+**Manual Deploy:**
+```bash
+# Windows
+deploy-render.bat
+
+# Linux/Mac
+chmod +x deploy-render.sh && ./deploy-render.sh
+```
+
+**Live Demo**: [https://clinicdesk-frontend.onrender.com](https://clinicdesk-frontend.onrender.com)
 
 3. **Manual setup (Alternative)**
    

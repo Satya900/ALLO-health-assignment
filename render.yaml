@@ -1,36 +1,57 @@
+# Render Blueprint for ClinicDesk Monorepo Deployment
+
 services:
+  # Backend API Service
   - type: web
     name: clinicdesk-backend
     env: node
     region: oregon
     plan: starter
-    buildCommand: cd Backend && npm install
+    buildCommand: |
+      npm install
+      cd Backend && npm install
     startCommand: cd Backend && npm start
     healthCheckPath: /health
+    autoDeploy: true
     envVars:
       - key: NODE_ENV
         value: production
       - key: PORT
         value: 10000
       - key: MONGO_URI
-        fromDatabase:
-          name: clinicdesk-db
-          property: connectionString
+        sync: false  # Set manually in dashboard
       - key: JWT_SECRET
         generateValue: true
       - key: CORS_ORIGIN
-        fromService:
-          type: web
-          name: clinicdesk-frontend
-          property: host
+        value: "*"
+      - key: BCRYPT_SALT_ROUNDS
+        value: "12"
+      - key: JWT_EXPIRES_IN
+        value: "7d"
 
+  # Frontend Static Site
   - type: web
     name: clinicdesk-frontend
     env: static
     region: oregon
     plan: starter
-    buildCommand: cd Frontend && npm install && npm run build
+    buildCommand: |
+      npm install
+      cd Frontend && npm install && npm run build
     staticPublishPath: Frontend/dist
+    pullRequestPreviewsEnabled: true
+    autoDeploy: true
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
     envVars:
       - key: VITE_API_URL
         fromService:
@@ -39,10 +60,7 @@ services:
           property: host
       - key: VITE_APP_NAME
         value: ClinicDesk
-
-databases:
-  - name: clinicdesk-db
-    databaseName: clinicdesk
-    user: clinicdesk_user
-    region: oregon
-    plan: starter
+      - key: VITE_APP_VERSION
+        value: "1.0.0"
+      - key: VITE_APP_DESCRIPTION
+        value: Healthcare clinic management system
