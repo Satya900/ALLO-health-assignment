@@ -1,21 +1,28 @@
 const dotenv = require("dotenv");
 const express = require("express");
+const path = require("path");
 const app = express();
 dotenv.config();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8000;
 const cors = require("cors");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 
-app.use(
-  cors({
-    origin: "http://localhost:5173", //Vite dev URL
-    credentials: true,
-  })
-);
+// CORS configuration for production and development
+const corsOptions = {
+  origin: process.env.CORS_ORIGIN || "http://localhost:5173",
+  credentials: true,
+  optionsSuccessStatus: 200
+};
 
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
+
+// Serve static files from Frontend build in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../Frontend/dist')));
+}
 
 const authRoutes = require("./routes/authRoutes");
 const doctorRoutes = require("./routes/doctorRoutes");
@@ -68,3 +75,10 @@ app.get("/health", (req, res) => {
     res.status(503).json(healthCheck);
   }
 });
+
+// Serve React app for all non-API routes in production
+if (process.env.NODE_ENV === 'production') {
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../Frontend/dist/index.html'));
+  });
+}

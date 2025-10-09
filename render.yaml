@@ -1,0 +1,48 @@
+services:
+  - type: web
+    name: clinicdesk-backend
+    env: node
+    region: oregon
+    plan: starter
+    buildCommand: cd Backend && npm install
+    startCommand: cd Backend && npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGO_URI
+        fromDatabase:
+          name: clinicdesk-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CORS_ORIGIN
+        fromService:
+          type: web
+          name: clinicdesk-frontend
+          property: host
+
+  - type: web
+    name: clinicdesk-frontend
+    env: static
+    region: oregon
+    plan: starter
+    buildCommand: cd Frontend && npm install && npm run build
+    staticPublishPath: Frontend/dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: clinicdesk-backend
+          property: host
+      - key: VITE_APP_NAME
+        value: ClinicDesk
+
+databases:
+  - name: clinicdesk-db
+    databaseName: clinicdesk
+    user: clinicdesk_user
+    region: oregon
+    plan: starter

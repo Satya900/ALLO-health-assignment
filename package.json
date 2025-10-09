@@ -1,0 +1,35 @@
+{
+  "name": "clinicdesk-monorepo",
+  "version": "1.0.0",
+  "description": "ClinicDesk - Front Desk Management System",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install && cd Frontend && npm install && cd ../Backend && npm install",
+    "build": "cd Frontend && npm run build",
+    "start": "cd Backend && npm start",
+    "dev:frontend": "cd Frontend && npm run dev",
+    "dev:backend": "cd Backend && npm run dev",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "seed": "cd Backend && npm run seed-demo",
+    "test": "cd Frontend && npm test && cd ../Backend && npm test",
+    "clean": "rm -rf Frontend/dist Frontend/node_modules Backend/node_modules node_modules",
+    "heroku-postbuild": "npm run install:all && npm run build"
+  },
+  "workspaces": [
+    "Frontend",
+    "Backend"
+  ],
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Satya900/ALLO-health-assignment.git"
+  },
+  "author": "Satyabrata Mohapatra",
+  "license": "MIT"
+}

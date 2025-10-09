@@ -1,0 +1,28 @@
+[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "cd Backend && npm start"
+healthcheckPath = "/health"
+healthcheckTimeout = 300
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 3
+
+[[services]]
+name = "clinicdesk-backend"
+source = "Backend"
+
+[services.variables]
+NODE_ENV = "production"
+PORT = "${{ PORT }}"
+MONGO_URI = "${{ MONGO_URI }}"
+JWT_SECRET = "${{ JWT_SECRET }}"
+CORS_ORIGIN = "${{ FRONTEND_URL }}"
+
+[[services]]
+name = "clinicdesk-frontend"
+source = "Frontend"
+
+[services.variables]
+VITE_API_URL = "${{ BACKEND_URL }}"
+VITE_APP_NAME = "ClinicDesk"
