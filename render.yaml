@@ -33,7 +33,6 @@ services:
   - type: web
     name: clinicdesk-frontend
     env: static
-    region: oregon
     plan: starter
     buildCommand: |
       npm install

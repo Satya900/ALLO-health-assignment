@@ -18,6 +18,7 @@
 ## Environment Variables
 
 ### Backend Service:
+
 - [ ] `NODE_ENV=production`
 - [ ] `PORT=10000`
 - [ ] `MONGO_URI=mongodb+srv://...` (MongoDB Atlas connection string)
@@ -25,6 +26,7 @@
 - [ ] `CORS_ORIGIN=*` (or specific frontend URL)
 
 ### Frontend Service:
+
 - [ ] `VITE_API_URL=https://clinicdesk-backend.onrender.com`
 - [ ] `VITE_APP_NAME=ClinicDesk`
 - [ ] `VITE_APP_VERSION=1.0.0`
@@ -42,6 +44,7 @@
 ## Testing
 
 ### Test These Features:
+
 - [ ] User login (admin@clinic.com / admin123)
 - [ ] Dashboard statistics display
 - [ ] Patient management (add/edit/delete)
@@ -51,6 +54,7 @@
 - [ ] Real-time statistics updates
 
 ### Test These URLs:
+
 - [ ] Frontend: `https://clinicdesk-frontend.onrender.com`
 - [ ] Backend API: `https://clinicdesk-backend.onrender.com/api`
 - [ ] Health Check: `https://clinicdesk-backend.onrender.com/health`
@@ -104,11 +108,13 @@ Your deployment is successful when:
 ## 🚨 If Something Goes Wrong
 
 1. **Check Render Logs**:
+
    - Go to service dashboard
    - Click "Logs" tab
    - Look for error messages
 
 2. **Common Fixes**:
+
    - Restart services
    - Verify environment variables
    - Check database connection
