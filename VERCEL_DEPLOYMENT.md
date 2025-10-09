@@ -75,10 +75,10 @@ The frontend uses the production environment file automatically:
 
 ### Build Process
 
-1. Install dependencies for both Frontend and Backend
-2. Build Frontend using `npm run build`
-3. Deploy Backend as serverless functions
-4. Serve Frontend from CDN
+1. Vercel automatically detects the monorepo structure using workspaces
+2. Frontend is built using `@vercel/static-build` from `Frontend/package.json`
+3. Backend is deployed as serverless functions using `@vercel/node`
+4. Frontend is served from CDN, Backend functions handle API routes
 
 ## API Endpoints
 
