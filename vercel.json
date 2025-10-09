@@ -23,6 +23,9 @@
       "dest": "Frontend/dist/$1"
     }
   ],
+  "buildCommand": "cd Frontend && npm install && npm run build",
+  "outputDirectory": "Frontend/dist",
+  "installCommand": "npm install && cd Frontend && npm install && cd ../Backend && npm install",
   "env": {
     "NODE_ENV": "production"
   },
